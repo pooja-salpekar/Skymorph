@@ -15,12 +15,11 @@ GEM
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
     activemodel (3.2.13)
-      activesupport (= 3.2.13)
-      builder (~> 3.0.0)
-    activerecord (3.2.13)
       activemodel (= 3.2.13)
       activesupport (= 3.2.13)
+      activesupport (= 3.2.13)
       arel (~> 3.0.2)
+      builder (~> 3.0.0)
       tzinfo (~> 0.3.29)
     activeresource (3.2.13)
       activemodel (= 3.2.13)
@@ -65,7 +64,6 @@ GEM
     rails (3.2.13)
       actionmailer (= 3.2.13)
       actionpack (= 3.2.13)
-      activerecord (= 3.2.13)
       activeresource (= 3.2.13)
       activesupport (= 3.2.13)
       bundler (~> 1.0)
@@ -110,4 +108,5 @@ DEPENDENCIES
   nokogiri
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
+  tzinfo
   uglifier (>= 1.0.3)

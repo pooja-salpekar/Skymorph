@@ -1,6 +1,6 @@
 # Be sure to restart your server when you modify this file.
 
-Skymorph::Application.config.session_store :cookie_store, :key => '_Skymorph_session'
+#Skymorph::Application.config.session_store :cookie_store, :key => '_Skymorph_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
