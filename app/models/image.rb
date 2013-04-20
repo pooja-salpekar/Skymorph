@@ -9,13 +9,13 @@ class Image
     page = request.body
 
     image_links = get_image_links(page)
-    return format_link(image_links)
+    return format_links(image_links)
   end
 
   private
 
-    SOURCE_URL = "http://skyview.gsfc.nasa.gov/cgi-bin/runquery.pl"
     ROOT_URL = "http://skyview.gsfc.nasa.gov/"
+    SOURCE_URL = "#{ROOT_URL}/cgi-bin/runquery.pl"
 
     def self.get_image_links(html_page)
       links = []
@@ -27,10 +27,12 @@ class Image
       return links
     end
 
-    def self.format_link(links)
+    def self.format_links(links)
       links.each do |image_link|
-         [ROOT_URL, image_link].join
+        image_link.delete!("../") if image_link.start_with?("../")
+        image_link.insert(0, ROOT_URL)
       end
+      links
     end
 
 end
