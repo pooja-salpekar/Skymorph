@@ -1,14 +1,14 @@
-class Image
+class ImageUrls
   require "nokogiri"
   require "uri"
   require "net/http"
 
-  def self.request_source(position, survey, options = {})
+  def self.request(position, survey, options = {})
     query_params = {"position" => position, "survey" => survey}.merge(options)
     request = Net::HTTP.post_form(URI.parse(SOURCE_URL), query_params)
     page = request.body
 
-    image_links = get_image_links(page)
+    image_links = extract_links(page)
     return format_links(image_links)
   end
 
@@ -17,7 +17,7 @@ class Image
     ROOT_URL = "http://skyview.gsfc.nasa.gov/"
     SOURCE_URL = "#{ROOT_URL}/cgi-bin/runquery.pl"
 
-    def self.get_image_links(html_page)
+    def self.extract_links(html_page)
       links = []
       doc = Nokogiri::HTML(html_page)
       image_sources = doc.css('img')
