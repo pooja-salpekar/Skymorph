@@ -10,5 +10,11 @@ describe ImageUrlsController do
       get :new
       assigns[:image_url].should equal(url)
     end
+
+    it "should assign a New Image as @page_name"  do
+      get :new
+      assigns[:page_name] == 'New Image'
+    end
+
   end
 end
