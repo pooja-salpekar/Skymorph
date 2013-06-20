@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe ImageUrls do
+describe Image do
 
   it "should add domain name to link" do
     links = ["first_link", "second_link"]
 
-    formatted_links = ImageUrls.format_links(links)
+    formatted_links = Image.format_links(links)
 
     formatted_links.should == ["http://skyview.gsfc.nasa.gov/first_link", "http://skyview.gsfc.nasa.gov/second_link"]
   end
@@ -13,7 +13,7 @@ describe ImageUrls do
   it "should remove unnecessary characters from url" do
     link = ["../some_link"]
 
-    formatted_link = ImageUrls.format_links(link)
+    formatted_link = Image.format_links(link)
 
     formatted_link.should == ["http://skyview.gsfc.nasa.gov/some_link"]
   end

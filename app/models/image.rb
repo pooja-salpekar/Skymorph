@@ -1,4 +1,4 @@
-class ImageUrls
+class Image < Hash
   require "nokogiri"
   require "uri"
   require "net/http"
@@ -6,9 +6,14 @@ class ImageUrls
   ROOT_URL = "http://skyview.gsfc.nasa.gov/"
   SOURCE_URL = "#{ROOT_URL}/cgi-bin/runquery.pl"
 
-  def self.request(position, survey, options = {})
-    query_params = {"position" => position, "survey" => survey}.merge(options)
+  def initialize
+    self['position'] = ''
+    self['survey'] = []
+    self['url'] = []
+  end
 
+  def self.request
+    query_params = self.except!('url')
     request = Net::HTTP.post_form(URI.parse(SOURCE_URL), query_params)
     page = request.body
 

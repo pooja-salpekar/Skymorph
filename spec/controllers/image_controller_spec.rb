@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe ImageUrlsController do
+describe ImageController do
 
   describe "GET request" do
 
     it "should assign a new ImageUrls as @image_url"  do
-      url = stub_model ImageUrls
-      ImageUrls.stub!(:new).and_return(url)
+      image = stub_model Image
+      Image.stub!(:new).and_return(image)
       get :new
-      assigns[:image_url].should equal(url)
+      assigns[:image] == image
     end
 
     it "should assign a New Image as @page_name"  do

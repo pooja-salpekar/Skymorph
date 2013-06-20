@@ -1,8 +1,8 @@
 Skymorph::Application.routes.draw do
 
-  root :to => 'image_urls#index'
+  root :to => 'image#index'
 
-  resources :image_urls do
+  resources :image do
     get :new
   end
 end
