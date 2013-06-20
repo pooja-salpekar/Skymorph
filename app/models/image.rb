@@ -17,29 +17,27 @@ class Image < Hash
     request = Net::HTTP.post_form(URI.parse(SOURCE_URL), query_params)
     page = request.body
 
-    image_links = extract_links(page)
-    return format_links(image_links)
+    add_urls(page)
+    format_links
   end
 
-  def self.extract_links(html_page)
-    links = []
+  private
 
-    doc = Nokogiri::HTML(html_page)
-    image_sources = doc.css('img')
+    def add_urls(html_page)
+      doc = Nokogiri::HTML(html_page)
+      image_sources = doc.css('img')
 
-    image_sources.each do |image|
-      links << image['src']
+      image_sources.each do |image|
+        self['url'] << image['src']
+      end
+
     end
 
-    return links
-  end
-
-  def self.format_links(links)
-    links.each do |image_link|
-      image_link.delete!("../") if image_link.start_with?("../")
-      image_link.insert(0, ROOT_URL)
+    def format_links()
+      self['url'].each do |url|
+        url.delete!("../") if url.start_with?("../")
+        url.insert(0, ROOT_URL)
+      end
     end
-    links
-  end
 
 end
