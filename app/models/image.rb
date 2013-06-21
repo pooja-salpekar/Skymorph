@@ -3,7 +3,7 @@ class Image < Hash
   require "uri"
   require "net/http"
 
-  ROOT_URL = "http://skyview.gsfc.nasa.gov/"
+  ROOT_URL = "http://skyview.gsfc.nasa.gov"
   SOURCE_URL = "#{ROOT_URL}/cgi-bin/runquery.pl"
 
   def initialize(args={})
@@ -13,15 +13,20 @@ class Image < Hash
   end
 
   def request
-    query_params = self.except!('url')
+    query_params = self.except('url')
     request = Net::HTTP.post_form(URI.parse(SOURCE_URL), query_params)
     request.body
   end
 
+  def urls
+    add_urls request
+    format_links
+  end
+
   private
 
-    def add_urls(html_page)
-      doc = Nokogiri::HTML(html_page)
+    def add_urls(page)
+      doc = Nokogiri::HTML(page)
       image_sources = doc.css('img')
 
       image_sources.each do |image|
