@@ -9,4 +9,13 @@ describe Image do
 
     body.should == 'html body'
   end
+
+  it 'urls should return the formatted urls' do
+    image = Image.new
+    image.should_receive(:request).and_return("<img src= '/dummy_link'></img>")
+
+    url = image.urls
+    url.should include("http://skyview.gsfc.nasa.gov/dummy_link")
+
+  end
 end
