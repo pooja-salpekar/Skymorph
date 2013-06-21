@@ -6,19 +6,16 @@ class Image < Hash
   ROOT_URL = "http://skyview.gsfc.nasa.gov/"
   SOURCE_URL = "#{ROOT_URL}/cgi-bin/runquery.pl"
 
-  def initialize
-    self['position'] = ''
-    self['survey'] = []
-    self['url'] = []
+  def initialize(args={})
+    self['position'] = args['position'] || ''
+    self['survey'] = args['survey'] || []
+    self['url'] = args['url'] || []
   end
 
-  def self.request
+  def request
     query_params = self.except!('url')
     request = Net::HTTP.post_form(URI.parse(SOURCE_URL), query_params)
-    page = request.body
-
-    add_urls(page)
-    format_links
+    request.body
   end
 
   private
