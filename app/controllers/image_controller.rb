@@ -7,6 +7,8 @@ class ImageController < ApplicationController
 
   def find
     @image = Image.new(params[:image])
+    @image.urls
+
     render :text => "this is just for now"
   end
 
